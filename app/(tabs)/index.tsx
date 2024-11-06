@@ -1,73 +1,92 @@
-import { Image, StyleSheet, Platform } from "react-native";
-
-import { HelloWave } from "@/components/HelloWave";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
+import { Colors } from "@/constants/Colors";
+import { Image } from "expo-image";
+import { StyleSheet, Text, View } from "react-native";
+import { EnvelopeIcon } from "react-native-heroicons/outline";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
+  const blurhash =
+    "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
-      headerImage={
-        <Image
-          source={require("@/assets/images/partial-react-logo.png")}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Hello World!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit{" "}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText>{" "}
-          to see changes. Press{" "}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: "cmd + d", android: "cmd + m" })}
-          </ThemedText>{" "}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this
-          starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{" "}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText>{" "}
-          to get a fresh <ThemedText type="defaultSemiBold">app</ThemedText>{" "}
-          directory. This will move the current{" "}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{" "}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.header}>
+        <View style={{ flexDirection: "row", gap: 12 }}>
+          <View style={styles.wrapImage}>
+            <Image
+              style={styles.image}
+              source={require("@/assets/images/dummy.png")}
+              placeholder={{ blurhash }}
+              contentFit="cover"
+              transition={1000}
+            />
+          </View>
+          <View style={{ flexDirection: "column" }}>
+            <Text style={{ fontSize: 12, color: Colors["light"].slate800 }}>
+              Hello 👋
+            </Text>
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "bold",
+                color: Colors["light"].slate800,
+                marginTop: 4,
+              }}>
+              Singgih Budi Purnadi
+            </Text>
+          </View>
+        </View>
+        <View style={styles.notification}>
+          <EnvelopeIcon size={24} color={Colors["light"].slate400} />
+          <View
+            style={{
+              position: "absolute",
+              right: -8,
+              top: -8,
+              backgroundColor: "red",
+              borderRadius: 999,
+              justifyContent: "center",
+              alignItems: "center",
+              width: 24,
+              height: 24,
+            }}>
+            <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 10 }}>
+              99+
+            </Text>
+          </View>
+        </View>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  header: {
+    flexDirection: "row",
+    padding: 24,
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  wrapImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 999,
+    overflow: "hidden",
+    borderWidth: 2,
+    borderColor: Colors["light"].brand500,
+  },
+  image: {
+    flex: 1,
+    width: "100%",
+    backgroundColor: "#0553",
+  },
+  notification: {
+    padding: 8,
+    borderColor: Colors["light"].slate200,
+    borderWidth: 1,
+    position: "relative",
     flexDirection: "row",
     alignItems: "center",
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: "absolute",
+    borderRadius: 999,
+    backgroundColor: "#fff",
   },
 });
